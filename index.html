@@ -25,6 +25,7 @@
       <nav class="nav" role="tablist" aria-label="Sections">
         <button role="tab" data-view="overview" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Overview</button>
         <button role="tab" data-view="risk" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Risk review<span class="badge" id="alertCount" hidden>0</span></button>
+        <button role="tab" data-view="improve" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>Improve</button>
         <button role="tab" data-view="holdings" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/></svg>Holdings</button>
         <button role="tab" data-view="calendar" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendar</button>
         <button role="tab" data-view="news" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>News</button>
@@ -65,7 +66,7 @@
               <div class="chart-box tall"><canvas id="perfChart" aria-label="Portfolio value versus S&P 500, indexed to 100"></canvas></div>
             </article>
             <article class="card">
-              <header class="card-h"><h2>Risk health</h2><button class="link" data-goto="risk" type="button">Full review →</button></header>
+              <header class="card-h"><h2>Risk health</h2><span><button class="link" data-goto="risk" type="button">Review</button> <button class="link accent" data-goto="improve" type="button">How to improve →</button></span></header>
               <div class="score" id="score"></div>
               <ul class="alerts compact" id="alertsMini"></ul>
             </article>
@@ -121,6 +122,39 @@
           </div>
         </section>
 
+        <!-- IMPROVE -->
+        <section class="view" id="view-improve" role="tabpanel" hidden>
+          <div class="kpis" id="impKpis"></div>
+          <div class="grid g-2-1">
+            <article class="card">
+              <header class="card-h"><h2>Areas of improvement</h2><span class="muted">ranked by projected health-score impact</span></header>
+              <ol class="opps" id="opps"></ol>
+            </article>
+            <article class="card side-stack">
+              <section><h3 class="h3">Sector coverage gaps</h3><div id="gaps"></div></section>
+              <section><h3 class="h3">Hidden concentration</h3><ul class="pairs" id="pairs"></ul></section>
+              <section><h3 class="h3">Tax notes</h3><ul class="pairs" id="tax"></ul></section>
+            </article>
+          </div>
+          <article class="card">
+            <header class="card-h">
+              <h2>Rebalance plan to meet your guidelines</h2>
+              <div class="row-actions">
+                <button class="btn ghost" id="revertWhatIf" type="button" hidden>Revert to original</button>
+                <button class="btn primary" id="applyWhatIf" type="button">Apply as what-if</button>
+              </div>
+            </header>
+            <p class="muted plan-note" id="planNote"></p>
+            <div class="table-wrap">
+              <table class="tbl sm" id="planTable">
+                <thead><tr><th>Asset</th><th class="num">Current</th><th class="num">Target</th><th class="num">Trade</th><th class="num">Shares</th><th class="num">Est. realized gain</th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <p class="hint">Mechanical math against the limits you set, not a recommendation. "Apply as what-if" swaps the holdings in this browser so every chart and check reflects the plan; revert anytime.</p>
+          </article>
+        </section>
+
         <!-- HOLDINGS -->
         <section class="view" id="view-holdings" role="tabpanel" hidden>
           <article class="card">
@@ -172,24 +206,70 @@
 
         <!-- SETTINGS -->
         <section class="view" id="view-settings" role="tabpanel" hidden>
-          <form class="card settings" id="settingsForm">
-            <header class="card-h"><h2>Your risk parameters &amp; investment guidelines</h2><span class="muted">Saved in this browser · rechecks instantly</span></header>
-            <fieldset class="presets">
-              <legend>Start from a profile</legend>
-              <div class="seg" id="presetSeg">
-                <button type="button" data-preset="conservative">Conservative</button>
-                <button type="button" data-preset="moderate">Moderate</button>
-                <button type="button" data-preset="aggressive">Aggressive</button>
+          <form class="settings-wrap" id="settingsForm" onsubmit="return false">
+            <article class="card settings">
+              <header class="card-h"><h2>Risk parameters</h2><span class="saved" id="savedMsg" aria-live="polite"></span><span class="muted">Saved in this browser · every check reruns instantly</span></header>
+              <fieldset class="presets">
+                <legend>Start from a profile, then fine-tune any value (drag or type)</legend>
+                <div class="seg" id="presetSeg">
+                  <button type="button" data-preset="conservative">Conservative</button>
+                  <button type="button" data-preset="moderate">Moderate</button>
+                  <button type="button" data-preset="aggressive">Aggressive</button>
+                </div>
+              </fieldset>
+              <div class="groups" id="settingsGrid"></div>
+              <fieldset>
+                <legend>Excluded sectors (values or mandate screen)</legend>
+                <div class="chips" id="excludeChips"></div>
+              </fieldset>
+              <div class="form-foot">
+                <button class="btn ghost" type="button" id="resetSettings">Reset to Moderate</button>
+                <button class="btn ghost" type="button" id="exportGuides"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export guidelines</button>
+                <button class="btn ghost" type="button" id="importGuides"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>Import</button>
+                <input type="file" id="importFile" accept=".json,application/json" hidden />
               </div>
-            </fieldset>
-            <div class="settings-grid" id="settingsGrid"></div>
-            <fieldset>
-              <legend>Excluded sectors (values screen)</legend>
-              <div class="chips" id="excludeChips"></div>
-            </fieldset>
-            <div class="form-foot">
-              <button class="btn ghost" type="button" id="resetSettings">Reset to moderate</button>
-              <span class="saved" id="savedMsg" aria-live="polite"></span>
+            </article>
+
+            <div class="grid g-1-1">
+              <article class="card">
+                <header class="card-h"><h2>Exceptions</h2></header>
+                <p class="muted">Override the default limits for specific holdings or sectors, e.g. let a core position run to 15% or cap Energy at 10%.</p>
+                <h3 class="h3">Position limits</h3>
+                <div class="ov-add">
+                  <label class="sr" for="ovTicker">Holding</label><select id="ovTicker"></select>
+                  <label class="sr" for="ovTickerVal">Limit %</label><span class="numwrap"><input type="number" id="ovTickerVal" min="0.5" max="100" step="0.5" placeholder="15" /><span class="unit">%</span></span>
+                  <button class="btn" type="button" id="ovTickerAdd">Add</button>
+                </div>
+                <ul class="ov-list" id="ovTickerList"></ul>
+                <h3 class="h3">Sector caps</h3>
+                <div class="ov-add">
+                  <label class="sr" for="ovSector">Sector</label><select id="ovSector"></select>
+                  <label class="sr" for="ovSectorVal">Cap %</label><span class="numwrap"><input type="number" id="ovSectorVal" min="0.5" max="100" step="0.5" placeholder="40" /><span class="unit">%</span></span>
+                  <button class="btn" type="button" id="ovSectorAdd">Add</button>
+                </div>
+                <ul class="ov-list" id="ovSectorList"></ul>
+              </article>
+
+              <article class="card">
+                <header class="card-h"><h2>Custom rules</h2></header>
+                <p class="muted">Write your own guideline from any portfolio or per-holding metric. Failures show up in Risk review and Improve.</p>
+                <div class="rule-builder">
+                  <label class="sr" for="ruleScope">Applies to</label>
+                  <select id="ruleScope"><option value="holding">Each holding</option><option value="portfolio">Portfolio</option></select>
+                  <label class="sr" for="ruleMetric">Metric</label>
+                  <select id="ruleMetric"></select>
+                  <label class="sr" for="ruleOp">Condition</label>
+                  <select id="ruleOp"><option value="<=">must be ≤</option><option value=">=">must be ≥</option></select>
+                  <label class="sr" for="ruleVal">Threshold</label>
+                  <input type="number" id="ruleVal" step="any" placeholder="Value" />
+                  <label class="sr" for="ruleSev">Severity</label>
+                  <select id="ruleSev"><option value="med">Warning</option><option value="high">Breach</option><option value="info">Note</option></select>
+                  <button class="btn primary" type="button" id="ruleAdd">Add rule</button>
+                </div>
+                <p class="err" id="ruleErr" role="alert"></p>
+                <ul class="ov-list" id="ruleList"></ul>
+                <p class="hint">Ideas: each holding Upside to analyst target ≥ 0 · Portfolio Dividend yield ≥ 1.5 · Portfolio Number of sectors held ≥ 6 · each holding Volatility ≤ 45</p>
+              </article>
             </div>
           </form>
         </section>
@@ -222,7 +302,7 @@
       <div class="ltab" data-lpanel="paste" hidden>
         <label for="pasteBox">One position per line: <code>TICKER QTY [COST/SHARE]</code></label>
         <textarea id="pasteBox" rows="8" spellcheck="false" placeholder="AAPL 40 172.50&#10;NVDA 60 48&#10;JPM 25&#10;BTC 0.15"></textarea>
-        <p class="hint">Tickers outside the demo data snapshot are kept but flagged as missing market data.</p>
+        <p class="hint">Tickers outside the demo data snapshot are kept but flagged as missing market data. Add cash as <code>CASH 5000</code>.</p>
         <p class="err" id="pasteErr" role="alert"></p>
       </div>
 
