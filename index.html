@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sentinel — Portfolio Risk Monitor</title>
+  <meta name="description" content="Set your own risk guidelines and monitor portfolio concentration, performance, upcoming earnings and news." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322C55E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='m8 12 3 3 5-6'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Fira+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Primary">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m8 12 3 3 5-6"/></svg>
+        <span>Sentinel</span>
+        <span class="tag">demo</span>
+      </div>
+      <nav class="nav" role="tablist" aria-label="Sections">
+        <button role="tab" data-view="overview" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Overview</button>
+        <button role="tab" data-view="risk" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Risk review<span class="badge" id="alertCount" hidden>0</span></button>
+        <button role="tab" data-view="holdings" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/></svg>Holdings</button>
+        <button role="tab" data-view="calendar" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendar</button>
+        <button role="tab" data-view="news" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg>News</button>
+        <button role="tab" data-view="settings" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Guidelines</button>
+      </nav>
+      <div class="sources">
+        <p class="eyebrow">Data sources</p>
+        <ul id="sourceList"></ul>
+        <p class="asof" id="asOf"></p>
+      </div>
+    </aside>
+
+    <div class="content">
+      <header class="topbar">
+        <div>
+          <h1 id="viewTitle">Overview</h1>
+          <p class="sub" id="portfolioLabel">Demo portfolio</p>
+        </div>
+        <div class="top-actions">
+          <button class="btn ghost" id="exportBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Export review</button>
+          <button class="btn primary" id="linkBtn" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Link portfolio</button>
+        </div>
+      </header>
+
+      <main id="main">
+        <!-- OVERVIEW -->
+        <section class="view" id="view-overview" role="tabpanel">
+          <div class="kpis" id="kpis"></div>
+          <div class="grid g-2-1">
+            <article class="card">
+              <header class="card-h">
+                <h2>Performance vs S&amp;P 500</h2>
+                <div class="leg-inline" aria-hidden="true"><span><i class="l-port"></i>Your portfolio</span><span><i class="l-spy"></i>S&amp;P 500 (SPY)</span></div>
+                <div class="seg" role="group" aria-label="Range" id="rangeSeg">
+                  <button data-range="13">3M</button><button data-range="26">6M</button><button data-range="52" class="on">1Y</button>
+                </div>
+              </header>
+              <div class="chart-box tall"><canvas id="perfChart" aria-label="Portfolio value versus S&P 500, indexed to 100"></canvas></div>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Risk health</h2><button class="link" data-goto="risk" type="button">Full review →</button></header>
+              <div class="score" id="score"></div>
+              <ul class="alerts compact" id="alertsMini"></ul>
+            </article>
+          </div>
+          <div class="grid g-1-1-1">
+            <article class="card">
+              <header class="card-h"><h2>Sector exposure</h2></header>
+              <div class="chart-box"><canvas id="sectorChart" aria-label="Sector allocation donut chart"></canvas></div>
+              <ul class="legend" id="sectorLegend"></ul>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Next 30 days</h2><button class="link" data-goto="calendar" type="button">Calendar →</button></header>
+              <ul class="events" id="eventsMini"></ul>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Latest on your holdings</h2><button class="link" data-goto="news" type="button">All news →</button></header>
+              <ul class="news compact" id="newsMini"></ul>
+            </article>
+          </div>
+        </section>
+
+        <!-- RISK -->
+        <section class="view" id="view-risk" role="tabpanel" hidden>
+          <div class="grid g-1-1">
+            <article class="card">
+              <header class="card-h"><h2>Guideline checks</h2><span class="muted" id="ruleSummary"></span></header>
+              <ul class="alerts" id="alertsFull"></ul>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Risk metrics</h2><span class="muted">weekly data, 1Y</span></header>
+              <dl class="metrics" id="metrics"></dl>
+            </article>
+          </div>
+          <div class="grid g-1-1">
+            <article class="card">
+              <header class="card-h"><h2>Position weights vs your limit</h2></header>
+              <div class="chart-box tall"><canvas id="weightChart" aria-label="Position weights bar chart with limit line"></canvas></div>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Sector weights vs your limit</h2></header>
+              <div class="chart-box tall"><canvas id="sectorBarChart" aria-label="Sector weights bar chart with limit line"></canvas></div>
+            </article>
+          </div>
+          <div class="grid g-1-1">
+            <article class="card">
+              <header class="card-h"><h2>Drawdown from peak</h2></header>
+              <div class="chart-box"><canvas id="ddChart" aria-label="Portfolio drawdown chart"></canvas></div>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Risk vs return by holding</h2><span class="muted">bubble = weight</span></header>
+              <div class="chart-box"><canvas id="scatterChart" aria-label="Annualized volatility versus return per holding"></canvas></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- HOLDINGS -->
+        <section class="view" id="view-holdings" role="tabpanel" hidden>
+          <article class="card">
+            <header class="card-h">
+              <h2>Positions</h2>
+              <div class="row-actions">
+                <label class="search"><span class="sr">Filter holdings</span><input id="holdFilter" type="search" placeholder="Filter by ticker or sector" /></label>
+              </div>
+            </header>
+            <div class="table-wrap">
+              <table class="tbl" id="holdTable">
+                <thead><tr>
+                  <th data-sort="ticker">Asset</th><th data-sort="sector">Sector</th><th data-sort="shares" class="num">Qty</th>
+                  <th data-sort="price" class="num">Price</th><th data-sort="chg" class="num">1D</th><th data-sort="value" class="num">Value</th>
+                  <th data-sort="weight" class="num">Weight</th><th data-sort="pl" class="num">Unrealized</th><th data-sort="ret1y" class="num">1Y</th>
+                  <th data-sort="beta" class="num">Beta</th><th data-sort="pe" class="num">P/E</th><th>Analysts</th><th><span class="sr">Remove</span></th>
+                </tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- CALENDAR -->
+        <section class="view" id="view-calendar" role="tabpanel" hidden>
+          <div class="grid g-2-1">
+            <article class="card">
+              <header class="card-h"><h2>Upcoming catalysts</h2><span class="muted" id="calNote"></span></header>
+              <ul class="events timeline" id="eventsFull"></ul>
+            </article>
+            <article class="card">
+              <header class="card-h"><h2>Macro backdrop</h2></header>
+              <dl class="metrics" id="macroList"></dl>
+              <p class="foot-note">Rates and inflation shift the discount rate on growth-heavy portfolios. Compare your beta and sector mix against this backdrop.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- NEWS -->
+        <section class="view" id="view-news" role="tabpanel" hidden>
+          <article class="card">
+            <header class="card-h">
+              <h2>News feed</h2>
+              <div class="chips" id="newsChips" role="group" aria-label="Filter news"></div>
+            </header>
+            <ul class="news" id="newsFull"></ul>
+          </article>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="view" id="view-settings" role="tabpanel" hidden>
+          <form class="card settings" id="settingsForm">
+            <header class="card-h"><h2>Your risk parameters &amp; investment guidelines</h2><span class="muted">Saved in this browser · rechecks instantly</span></header>
+            <fieldset class="presets">
+              <legend>Start from a profile</legend>
+              <div class="seg" id="presetSeg">
+                <button type="button" data-preset="conservative">Conservative</button>
+                <button type="button" data-preset="moderate">Moderate</button>
+                <button type="button" data-preset="aggressive">Aggressive</button>
+              </div>
+            </fieldset>
+            <div class="settings-grid" id="settingsGrid"></div>
+            <fieldset>
+              <legend>Excluded sectors (values screen)</legend>
+              <div class="chips" id="excludeChips"></div>
+            </fieldset>
+            <div class="form-foot">
+              <button class="btn ghost" type="button" id="resetSettings">Reset to moderate</button>
+              <span class="saved" id="savedMsg" aria-live="polite"></span>
+            </div>
+          </form>
+        </section>
+      </main>
+
+      <footer class="footer">
+        Demo built for illustration. Market data is a snapshot pulled from connected data providers, not live. Flags compare holdings against the guidelines <em>you</em> set; this is not investment advice.
+      </footer>
+    </div>
+  </div>
+
+  <!-- LINK PORTFOLIO DIALOG -->
+  <dialog id="linkDialog" aria-labelledby="linkTitle">
+    <form method="dialog" class="dlg">
+      <header class="dlg-h">
+        <h2 id="linkTitle">Link your portfolio</h2>
+        <button class="icon-btn" value="cancel" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </header>
+      <div class="tabs2" role="tablist">
+        <button type="button" role="tab" data-ltab="connect" aria-selected="true">Connect broker</button>
+        <button type="button" role="tab" data-ltab="paste" aria-selected="false">Paste holdings</button>
+        <button type="button" role="tab" data-ltab="csv" aria-selected="false">Upload CSV</button>
+      </div>
+
+      <div class="ltab" data-lpanel="connect">
+        <p class="muted">Read-only connections through an aggregator. In this demo the connectors are placeholders — use Paste or CSV to review real holdings.</p>
+        <div class="brokers" id="brokers"></div>
+      </div>
+
+      <div class="ltab" data-lpanel="paste" hidden>
+        <label for="pasteBox">One position per line: <code>TICKER QTY [COST/SHARE]</code></label>
+        <textarea id="pasteBox" rows="8" spellcheck="false" placeholder="AAPL 40 172.50&#10;NVDA 60 48&#10;JPM 25&#10;BTC 0.15"></textarea>
+        <p class="hint">Tickers outside the demo data snapshot are kept but flagged as missing market data.</p>
+        <p class="err" id="pasteErr" role="alert"></p>
+      </div>
+
+      <div class="ltab" data-lpanel="csv" hidden>
+        <label class="drop" id="drop">
+          <input type="file" id="csvFile" accept=".csv,text/csv" />
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          <span><strong>Choose a CSV</strong> or drop it here</span>
+          <span class="hint">Columns: ticker/symbol, shares/quantity, cost_basis (optional). Most broker exports work.</span>
+        </label>
+        <p class="ok" id="csvMsg" role="status"></p>
+      </div>
+
+      <footer class="dlg-f">
+        <button type="button" class="btn ghost" id="loadDemo">Load demo portfolio</button>
+        <button type="button" class="btn primary" id="applyLink">Review portfolio</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

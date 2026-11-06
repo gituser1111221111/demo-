@@ -1,0 +1,771 @@
+{
+ "asOf": "2026-11-06T23:02:34.801Z",
+ "sources": [
+  "CoinGecko",
+  "Alpha Vantage",
+  "Robinhood market data",
+  "Web search"
+ ],
+ "crypto": {
+  "bitcoin": {
+   "name": "Bitcoin",
+   "symbol": "BTC",
+   "price": 75859,
+   "changePct": 0.30644,
+   "marketCap": 1525499508789,
+   "history": [
+    {
+     "d": "2025-11-10",
+     "c": 104610.23
+    },
+    {
+     "d": "2025-11-16",
+     "c": 95380.13
+    },
+    {
+     "d": "2025-11-22",
+     "c": 85087.95
+    },
+    {
+     "d": "2025-11-28",
+     "c": 91323.63
+    },
+    {
+     "d": "2025-12-04",
+     "c": 92119.19
+    },
+    {
+     "d": "2025-12-10",
+     "c": 91986.58
+    },
+    {
+     "d": "2025-12-16",
+     "c": 87719.68
+    },
+    {
+     "d": "2025-12-22",
+     "c": 88489.72
+    },
+    {
+     "d": "2025-12-29",
+     "c": 87867.04
+    },
+    {
+     "d": "2026-01-04",
+     "c": 90614.41
+    },
+    {
+     "d": "2026-01-10",
+     "c": 90551.71
+    },
+    {
+     "d": "2026-01-16",
+     "c": 95523.19
+    },
+    {
+     "d": "2026-01-22",
+     "c": 89483.65
+    },
+    {
+     "d": "2026-01-28",
+     "c": 89212.21
+    },
+    {
+     "d": "2026-02-03",
+     "c": 75628.04
+    },
+    {
+     "d": "2026-02-10",
+     "c": 70175.15
+    },
+    {
+     "d": "2026-02-16",
+     "c": 68778.84
+    },
+    {
+     "d": "2026-02-22",
+     "c": 68026.03
+    },
+    {
+     "d": "2026-02-28",
+     "c": 65891.22
+    },
+    {
+     "d": "2026-03-06",
+     "c": 68142.88
+    },
+    {
+     "d": "2026-03-12",
+     "c": 70417.19
+    },
+    {
+     "d": "2026-03-18",
+     "c": 71220.05
+    },
+    {
+     "d": "2026-03-24",
+     "c": 70528.86
+    },
+    {
+     "d": "2026-03-31",
+     "c": 66691.27
+    },
+    {
+     "d": "2026-04-06",
+     "c": 69002.04
+    },
+    {
+     "d": "2026-04-12",
+     "c": 73021.86
+    },
+    {
+     "d": "2026-04-18",
+     "c": 75716.15
+    },
+    {
+     "d": "2026-04-24",
+     "c": 77447.62
+    },
+    {
+     "d": "2026-04-30",
+     "c": 76296.8
+    },
+    {
+     "d": "2026-05-06",
+     "c": 81436.86
+    },
+    {
+     "d": "2026-05-13",
+     "c": 80482.14
+    },
+    {
+     "d": "2026-05-19",
+     "c": 76959.41
+    },
+    {
+     "d": "2026-05-25",
+     "c": 77016.07
+    },
+    {
+     "d": "2026-05-31",
+     "c": 73598.67
+    },
+    {
+     "d": "2026-06-06",
+     "c": 60855.25
+    },
+    {
+     "d": "2026-06-12",
+     "c": 63532.28
+    },
+    {
+     "d": "2026-06-18",
+     "c": 62897.24
+    },
+    {
+     "d": "2026-06-24",
+     "c": 60989.57
+    },
+    {
+     "d": "2026-07-01",
+     "c": 58566.09
+    },
+    {
+     "d": "2026-07-07",
+     "c": 64001.24
+    },
+    {
+     "d": "2026-07-13",
+     "c": 63746.66
+    },
+    {
+     "d": "2026-07-19",
+     "c": 64670.4
+    },
+    {
+     "d": "2026-07-25",
+     "c": 64318.25
+    },
+    {
+     "d": "2026-07-31",
+     "c": 62820.09
+    },
+    {
+     "d": "2026-08-06",
+     "c": 64262.75
+    },
+    {
+     "d": "2026-08-13",
+     "c": 63408.63
+    },
+    {
+     "d": "2026-08-19",
+     "c": 64686.26
+    },
+    {
+     "d": "2026-08-25",
+     "c": 78973.89
+    },
+    {
+     "d": "2026-08-31",
+     "c": 78552.78
+    },
+    {
+     "d": "2026-09-06",
+     "c": 80329.35
+    },
+    {
+     "d": "2026-09-12",
+     "c": 77261.63
+    },
+    {
+     "d": "2026-09-18",
+     "c": 80873.58
+    },
+    {
+     "d": "2026-09-24",
+     "c": 84377.97
+    },
+    {
+     "d": "2026-10-01",
+     "c": 83576.13
+    },
+    {
+     "d": "2026-10-07",
+     "c": 85540.09
+    },
+    {
+     "d": "2026-10-13",
+     "c": 81794.85
+    },
+    {
+     "d": "2026-10-19",
+     "c": 81875.26
+    },
+    {
+     "d": "2026-10-25",
+     "c": 80048.85
+    },
+    {
+     "d": "2026-10-31",
+     "c": 77520.89
+    },
+    {
+     "d": "2026-11-06",
+     "c": 75704.6
+    }
+   ]
+  },
+  "ethereum": {
+   "name": "Ethereum",
+   "symbol": "ETH",
+   "price": 2237.16,
+   "changePct": 0.40866,
+   "marketCap": 273431604628,
+   "history": [
+    {
+     "d": "2025-11-10",
+     "c": 3578.8
+    },
+    {
+     "d": "2025-11-16",
+     "c": 3169.7
+    },
+    {
+     "d": "2025-11-22",
+     "c": 2763.9
+    },
+    {
+     "d": "2025-11-28",
+     "c": 3014.82
+    },
+    {
+     "d": "2025-12-04",
+     "c": 3134.35
+    },
+    {
+     "d": "2025-12-10",
+     "c": 3323.29
+    },
+    {
+     "d": "2025-12-16",
+     "c": 2957.86
+    },
+    {
+     "d": "2025-12-22",
+     "c": 3005.38
+    },
+    {
+     "d": "2025-12-29",
+     "c": 2948.83
+    },
+    {
+     "d": "2026-01-04",
+     "c": 3126.25
+    },
+    {
+     "d": "2026-01-10",
+     "c": 3085.41
+    },
+    {
+     "d": "2026-01-16",
+     "c": 3293.57
+    },
+    {
+     "d": "2026-01-22",
+     "c": 2950.49
+    },
+    {
+     "d": "2026-01-28",
+     "c": 3007.55
+    },
+    {
+     "d": "2026-02-03",
+     "c": 2226.41
+    },
+    {
+     "d": "2026-02-10",
+     "c": 2106.79
+    },
+    {
+     "d": "2026-02-16",
+     "c": 1967.55
+    },
+    {
+     "d": "2026-02-22",
+     "c": 1973.87
+    },
+    {
+     "d": "2026-02-28",
+     "c": 1931.12
+    },
+    {
+     "d": "2026-03-06",
+     "c": 1979.08
+    },
+    {
+     "d": "2026-03-12",
+     "c": 2071.92
+    },
+    {
+     "d": "2026-03-18",
+     "c": 2203.13
+    },
+    {
+     "d": "2026-03-24",
+     "c": 2156.39
+    },
+    {
+     "d": "2026-03-31",
+     "c": 2024.01
+    },
+    {
+     "d": "2026-04-06",
+     "c": 2122.89
+    },
+    {
+     "d": "2026-04-12",
+     "c": 2283.06
+    },
+    {
+     "d": "2026-04-18",
+     "c": 2351.46
+    },
+    {
+     "d": "2026-04-24",
+     "c": 2315.22
+    },
+    {
+     "d": "2026-04-30",
+     "c": 2256.95
+    },
+    {
+     "d": "2026-05-06",
+     "c": 2351.01
+    },
+    {
+     "d": "2026-05-13",
+     "c": 2275.75
+    },
+    {
+     "d": "2026-05-19",
+     "c": 2128.89
+    },
+    {
+     "d": "2026-05-25",
+     "c": 2097.66
+    },
+    {
+     "d": "2026-05-31",
+     "c": 2005.05
+    },
+    {
+     "d": "2026-06-06",
+     "c": 1568.7
+    },
+    {
+     "d": "2026-06-12",
+     "c": 1665.56
+    },
+    {
+     "d": "2026-06-18",
+     "c": 1710.08
+    },
+    {
+     "d": "2026-06-24",
+     "c": 1620.64
+    },
+    {
+     "d": "2026-07-01",
+     "c": 1569.83
+    },
+    {
+     "d": "2026-07-07",
+     "c": 1798.56
+    },
+    {
+     "d": "2026-07-13",
+     "c": 1805.49
+    },
+    {
+     "d": "2026-07-19",
+     "c": 1870.82
+    },
+    {
+     "d": "2026-07-25",
+     "c": 1874.46
+    },
+    {
+     "d": "2026-07-31",
+     "c": 1860.59
+    },
+    {
+     "d": "2026-08-06",
+     "c": 1902.16
+    },
+    {
+     "d": "2026-08-13",
+     "c": 1877.74
+    },
+    {
+     "d": "2026-08-19",
+     "c": 1916.4
+    },
+    {
+     "d": "2026-08-25",
+     "c": 2481.88
+    },
+    {
+     "d": "2026-08-31",
+     "c": 2466.57
+    },
+    {
+     "d": "2026-09-06",
+     "c": 2514.01
+    },
+    {
+     "d": "2026-09-12",
+     "c": 2525.27
+    },
+    {
+     "d": "2026-09-18",
+     "c": 2611.56
+    },
+    {
+     "d": "2026-09-24",
+     "c": 2687.13
+    },
+    {
+     "d": "2026-10-01",
+     "c": 2684.71
+    },
+    {
+     "d": "2026-10-07",
+     "c": 2697.17
+    },
+    {
+     "d": "2026-10-13",
+     "c": 2445.89
+    },
+    {
+     "d": "2026-10-19",
+     "c": 2405.92
+    },
+    {
+     "d": "2026-10-25",
+     "c": 2326.83
+    },
+    {
+     "d": "2026-10-31",
+     "c": 2254.13
+    },
+    {
+     "d": "2026-11-06",
+     "c": 2225.43
+    }
+   ]
+  }
+ },
+ "cryptoNews": [
+  {
+   "title": "Trump administration cancels meeting of White House tech advisory panel",
+   "source": "Crypto Briefing",
+   "url": "https://cryptobriefing.com/trump-cancels-white-house-tech-panel-meeting/",
+   "date": "2026-11-06T22:49:30Z"
+  },
+  {
+   "title": "Fable Studio unveils AI-generated animated film Gods Don’t Give Gifts",
+   "source": "Crypto Briefing",
+   "url": "https://cryptobriefing.com/fable-studio-ai-animated-film-gods-dont-give-gifts/",
+   "date": "2026-11-06T22:39:48Z"
+  },
+  {
+   "title": "US Treasury bars MEXC Global over $16 billion in illicit crypto transactions",
+   "source": "COINTURK NEWS",
+   "url": "https://en.coin-turk.com/us-treasury-bars-mexc-global-over-16-billion-in-illicit-crypto-transactions/",
+   "date": "2026-11-06T22:36:27Z"
+  },
+  {
+   "title": "IRS updates crypto donation tax rules: Deductions now require stricter documentation",
+   "source": "COINTURK NEWS",
+   "url": "https://en.coin-turk.com/irs-updates-crypto-donation-tax-rules-deductions-now-require-stricter-documentation/",
+   "date": "2026-11-06T22:27:27Z"
+  }
+ ],
+ "macro": {
+  "fedFunds": 3.88,
+  "tenYear": 4.84,
+  "twoYear": 4.46,
+  "cpiYoY": 3.74,
+  "unemployment": 4.1,
+  "asOfNotes": {
+   "fedFunds": "2026-11-05 (effective, daily)",
+   "tenYear": "2026-11-05 (daily)",
+   "twoYear": "2026-11-05 (daily)",
+   "cpiYoY": "2026-09 (CPI index 336.940 vs 324.800 in 2025-09, computed)",
+   "unemployment": "2026-10"
+  }
+ },
+ "earningsCalendar": [
+  {
+   "ticker": "NVDA",
+   "date": "2026-11-17",
+   "time": "amc",
+   "epsEstimate": 2.48,
+   "confirmed": true,
+   "lastReported": {
+    "date": "2026-08-26",
+    "epsActual": 2.22,
+    "epsEstimate": 2.09
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "AVGO",
+   "date": "2026-12-09",
+   "time": "amc",
+   "epsEstimate": 3.79,
+   "confirmed": true,
+   "lastReported": {
+    "date": "2026-09-02",
+    "epsActual": 3.32,
+    "epsEstimate": 3.16
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "JPM",
+   "date": "2027-01-14",
+   "time": "bmo",
+   "epsEstimate": 5.77,
+   "confirmed": true,
+   "lastReported": {
+    "date": "2026-10-13",
+    "epsActual": 5.75,
+    "epsEstimate": 5.94
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "JNJ",
+   "date": "2027-01-26",
+   "time": "bmo",
+   "epsEstimate": 2.96,
+   "confirmed": true,
+   "lastReported": {
+    "date": "2026-10-13",
+    "epsActual": 2.59,
+    "epsEstimate": 2.53
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "MSFT",
+   "date": "2027-01-27",
+   "time": "amc",
+   "epsEstimate": 4.86,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-10-28",
+    "epsActual": 4.89,
+    "epsEstimate": 4.72
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "META",
+   "date": "2027-01-27",
+   "time": "amc",
+   "epsEstimate": 8.3,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-10-21",
+    "epsActual": 7.4,
+    "epsEstimate": 5.74
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "TSLA",
+   "date": "2027-01-27",
+   "time": "amc",
+   "epsEstimate": 0.45,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-10-21",
+    "epsActual": 0.48,
+    "epsEstimate": 0.4
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "AAPL",
+   "date": "2027-01-28",
+   "time": "amc",
+   "epsEstimate": 2.9,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-11-02",
+    "epsActual": 2.1,
+    "epsEstimate": 1.98
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "XOM",
+   "date": "2027-01-29",
+   "time": "bmo",
+   "epsEstimate": 4.14,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-10-30",
+    "epsActual": 4.23,
+    "epsEstimate": 4.01
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "GOOGL",
+   "date": "2027-02-03",
+   "time": "amc",
+   "epsEstimate": 3.19,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-10-28",
+    "epsActual": 2.12,
+    "epsEstimate": 2.99
+   },
+   "source": "Robinhood"
+  },
+  {
+   "ticker": "AMZN",
+   "date": "2027-02-04",
+   "time": "amc",
+   "epsEstimate": 2.42,
+   "confirmed": false,
+   "lastReported": {
+    "date": "2026-10-29",
+    "epsActual": 1.89,
+    "epsEstimate": 1.97
+   },
+   "source": "Robinhood"
+  }
+ ],
+ "marketNews": [
+  {
+   "title": "Stock market news for Nov. 5, 2026",
+   "source": "CNBC",
+   "url": "https://www.cnbc.com/2026/11/04/stock-market-today-live-updates.html",
+   "date": "2026-11-05",
+   "sentiment": null,
+   "tickers": [
+    "NVDA",
+    "AVGO"
+   ]
+  },
+  {
+   "title": "Nvidia Investors Need to Be Paying Attention on Nov. 17",
+   "source": "The Motley Fool",
+   "url": "https://www.fool.com/investing/2026/11/05/stock-investors-need-to-be-paying-attention-on-dat/",
+   "date": "2026-11-05",
+   "sentiment": null,
+   "tickers": [
+    "NVDA"
+   ]
+  },
+  {
+   "title": "Should You Buy Nvidia Stock Before Nov. 17?",
+   "source": "The Motley Fool",
+   "url": "https://www.fool.com/investing/2026/11/05/should-you-buy-nvidia-stock-before-nov-17/",
+   "date": "2026-11-05",
+   "sentiment": null,
+   "tickers": [
+    "NVDA"
+   ]
+  },
+  {
+   "title": "Nvidia Stock Is Down Nearly 24% Ahead of Earnings: Is It a Buy?",
+   "source": "Benzinga",
+   "url": "https://www.benzinga.com/markets/prediction-markets/26/11/62956559/nvidia-stock-selloff",
+   "date": "2026-11",
+   "sentiment": null,
+   "tickers": [
+    "NVDA",
+    "AAPL",
+    "AMZN"
+   ]
+  },
+  {
+   "title": "Nvidia Stock Analysis November 2026: NVDA Falls 15% From Its Record as Earnings Near",
+   "source": "Vantage Markets",
+   "url": "https://www.vantagemarkets.com/en/market-analysis/nvda-stock-monthly-outlook-analysis-nvidia/",
+   "date": "2026-11",
+   "sentiment": null,
+   "tickers": [
+    "NVDA"
+   ]
+  },
+  {
+   "title": "Wall Street Prepares for Wild Swings With Nvidia Earnings, US Midterm Elections",
+   "source": "Bloomberg",
+   "url": "https://www.bloomberg.com/news/articles/2026-11-01/wall-street-braces-for-more-wild-days-in-stocks-after-tech-rout",
+   "date": "2026-11-01",
+   "sentiment": null,
+   "tickers": [
+    "NVDA"
+   ]
+  }
+ ],
+ "economicEvents": [
+  {
+   "date": "2026-12-09",
+   "title": "FOMC rate decision",
+   "description": "Dec 8–9 meeting · statement 2:00 PM ET (federalreserve.gov)"
+  },
+  {
+   "date": "2026-12-30",
+   "title": "FOMC minutes",
+   "description": "Minutes of the Dec 8–9 meeting (federalreserve.gov)"
+  }
+ ]
+}
